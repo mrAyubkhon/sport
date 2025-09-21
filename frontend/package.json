@@ -38,7 +38,7 @@
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "recharts": "^2.8.0",
-    "framer-motion": "^10.16.16",
+    "framer-motion": "^12.23.16",
     "react-hook-form": "^7.48.2",
     "@hookform/resolvers": "^3.3.2",
     "zod": "^3.22.4",
