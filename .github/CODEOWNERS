@@ -1,0 +1,21 @@
+# Global code owners
+* @mrAyubkhon
+
+# Backend code owners
+/backend/ @mrAyubkhon
+
+# Frontend code owners
+/frontend/ @mrAyubkhon
+
+# Documentation owners
+*.md @mrAyubkhon
+/docs/ @mrAyubkhon
+
+# Configuration files
+/.github/ @mrAyubkhon
+/docker-compose.yml @mrAyubkhon
+/.gitignore @mrAyubkhon
+
+# Package files
+package.json @mrAyubkhon
+package-lock.json @mrAyubkhon

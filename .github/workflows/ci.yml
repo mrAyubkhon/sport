@@ -1,0 +1,126 @@
+name: 🚀 CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+    
+    - name: 📥 Install Backend Dependencies
+      run: |
+        cd backend
+        npm ci
+    
+    - name: 🗄️ Setup Database
+      run: |
+        cd backend
+        npx prisma generate
+        npx prisma db push
+    
+    - name: 🧪 Run Backend Tests
+      run: |
+        cd backend
+        npm test
+    
+    - name: 🔍 Lint Backend Code
+      run: |
+        cd backend
+        npm run lint
+    
+    - name: 🎨 Format Check Backend
+      run: |
+        cd backend
+        npm run format:check
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: 📥 Install Frontend Dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: 🧪 Run Frontend Tests
+      run: |
+        cd frontend
+        npm test
+    
+    - name: 🔍 Lint Frontend Code
+      run: |
+        cd frontend
+        npm run lint
+    
+    - name: 🎨 Format Check Frontend
+      run: |
+        cd frontend
+        npm run format:check
+    
+    - name: 🏗️ Build Frontend
+      run: |
+        cd frontend
+        npm run build
+
+  security-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: 🔒 Backend Security Audit
+      run: |
+        cd backend
+        npm audit --audit-level moderate
+    
+    - name: 🔒 Frontend Security Audit
+      run: |
+        cd frontend
+        npm audit --audit-level moderate
+
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: 📊 Code Coverage
+      run: |
+        echo "Code coverage analysis will be implemented here"
+    
+    - name: 📈 Type Coverage
+      run: |
+        echo "TypeScript coverage analysis will be implemented here"

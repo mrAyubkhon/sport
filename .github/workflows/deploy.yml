@@ -1,0 +1,41 @@
+name: 🚀 Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: 📥 Install Dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: 🏗️ Build Frontend
+      run: |
+        cd frontend
+        npm run build
+    
+    - name: 🚀 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./frontend/dist
+        cname: sport-achievements.vercel.app  # Замените на ваш домен
+    
+    - name: 📧 Notify Deployment
+      run: |
+        echo "🚀 Deployment completed successfully!"
+        echo "📱 Demo available at: https://mrAyubkhon.github.io/sport"
