@@ -64,7 +64,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vitest": "^1.0.4",
-    "@vitest/ui": "^1.0.4",
+    "@vitest/ui": "^3.2.4",
     "@testing-library/react": "^14.1.2",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/user-event": "^14.5.1",
