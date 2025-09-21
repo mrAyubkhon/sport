@@ -37,7 +37,7 @@
     "clsx": "^2.0.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "recharts": "^2.8.0",
+    "recharts": "^3.2.1",
     "framer-motion": "^10.16.16",
     "react-hook-form": "^7.48.2",
     "@hookform/resolvers": "^3.3.2",
