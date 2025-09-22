@@ -26,12 +26,19 @@ jobs:
         npm ci
     
     - name: 🗄️ Setup Database
+      env:
+        DATABASE_URL: "file:./test.db"
       run: |
         cd backend
         npx prisma generate
         npx prisma db push
     
     - name: 🧪 Run Backend Tests
+      env:
+        DATABASE_URL: "file:./test.db"
+        JWT_SECRET: "test-secret-key-for-ci"
+        JWT_REFRESH_SECRET: "test-refresh-secret-key-for-ci"
+        NODE_ENV: "test"
       run: |
         cd backend
         npm test
@@ -97,6 +104,8 @@ jobs:
         cache: 'npm'
     
     - name: 🔒 Backend Security Audit
+      env:
+        DATABASE_URL: "file:./test.db"
       run: |
         cd backend
         npm audit --audit-level moderate
